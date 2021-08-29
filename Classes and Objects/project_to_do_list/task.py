@@ -5,7 +5,6 @@ class Task:
     def __init__(self, name, due_date):
         self.name = name
         self.due_date = due_date
-        self.tasks = []
 
     def change_name(self, new_name: str):
         if self.name == new_name:
