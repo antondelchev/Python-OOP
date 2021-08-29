@@ -16,4 +16,4 @@ class Player:
     def player_info(self):
         info = [f"==={k} - {v}" for k, v in self.skills.items()]
         return f"Name: {self.name}\n" + f"Guild: {self.guild}\n" + f"HP: {self.hp}\n" \
-               + f"MP: {self.mp}\n" + "\n".join(info)
+               + f"MP: {self.mp}\n" + "\n".join(info) + "\n"
