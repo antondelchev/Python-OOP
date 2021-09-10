@@ -8,7 +8,8 @@ class Zoo:
         self.workers = []
 
     def add_animal(self, animal, price):
-        pass
+        if price <= self.__budget and self.__animal_capacity + 1 <= self.__animal_capacity:
+            return f"{animal} the {animal.__class__.__name__} added to the zoo"
 
     def hire_worker(self, worker):
         pass
