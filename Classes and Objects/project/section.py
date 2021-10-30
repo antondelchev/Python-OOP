@@ -12,7 +12,7 @@ class Section:
                 return f"Task is already in the section {self.name}"
 
         self.tasks.append(new_task)
-        return f"Task Name: {new_task.details()} is added to the section"
+        return f"Task {new_task.details()} is added to the section"
 
     def complete_task(self, task_name):
         for task in self.tasks:
