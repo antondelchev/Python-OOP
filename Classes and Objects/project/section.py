@@ -24,11 +24,15 @@ class Section:
 
     def clean_section(self):
         counter = 0
+        not_completed = []
+
         for task in self.tasks:
             if task.completed:
                 counter += 1
-                self.tasks.remove(task)
+            else:
+                not_completed.append(task)
 
+        self.tasks = not_completed
         return f"Cleared {counter} tasks."
 
     def view_section(self):
