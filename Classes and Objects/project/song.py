@@ -1,5 +1,5 @@
 class Song:
-    def __init__(self, name, length, single):
+    def __init__(self, name, length, single: bool):
         self.name = name
         self.length = length
         self.single = single
