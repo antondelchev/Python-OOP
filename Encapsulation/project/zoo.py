@@ -73,7 +73,7 @@ class Zoo:
             animal_types[animal.__class__.__name__].append(animal)
 
         for animal, animal_name in animal_types.items():
-            if animal:
+            if animal_types[animal]:
                 result += "\n"
                 result += f"----- {len(animal_types[animal])} {animal}s:\n"
                 result += "\n".join([f"{x.__repr__()}" for x in animal_types[animal]])
@@ -82,7 +82,6 @@ class Zoo:
 
     def workers_status(self):
         result = f"You have {len(self.workers)} workers"
-
         worker_types = {"Keeper": [],
                         "Caretaker": [],
                         "Vet": [],
@@ -92,7 +91,7 @@ class Zoo:
             worker_types[worker.__class__.__name__].append(worker)
 
         for worker, worker_name in worker_types.items():
-            if worker:
+            if worker_types[worker]:
                 result += "\n"
                 result += f"----- {len(worker_types[worker])} {worker}s:\n"
                 result += "\n".join([f"{x.__repr__()}" for x in worker_types[worker]])
