@@ -11,7 +11,7 @@ class Pizza:
 
     @property
     def name(self):
-        return
+        return self.__name
 
     @name.setter
     def name(self, value):
@@ -22,7 +22,7 @@ class Pizza:
 
     @property
     def dough(self):
-        return
+        return self.__dough
 
     @dough.setter
     def dough(self, value):
@@ -33,25 +33,32 @@ class Pizza:
 
     @property
     def toppings_capacity(self):
-        return
+        return self.__toppings_capacity
 
     @toppings_capacity.setter
     def toppings_capacity(self, value):
-        if value <= 0:
+        if value < 0:
             raise ValueError("The topping's capacity cannot be less or equal to zero")
         else:
             self.__toppings_capacity = value
 
     def add_topping(self, topping: Topping):
-        for type_name, weight in self.toppings.items():
-            if topping.topping_type == type_name and topping.weight:
-                self.toppings[type_name] += float(weight)
-                return
-
-        if not self.toppings.get(topping.topping_type) and self.toppings_capacity == 0:
+        if self.toppings_capacity > 0:
+            for type_name, weight in self.toppings.items():
+                if topping.topping_type == type_name and topping.weight and self.toppings_capacity - 1 > 0:
+                    self.toppings[type_name] += weight
+                    self.toppings_capacity -= 1
+                    return
+            self.toppings[topping.topping_type] = topping.weight
+            self.toppings_capacity -= 1
+        else:
             raise ValueError("Not enough space for another topping")
 
-        self.toppings[topping.topping_type] = topping.weight
-
     def calculate_total_weight(self):
-        pass
+        result = 0
+        for name, weight in self.toppings.items():
+            result += weight
+
+        result += self.dough.weight
+
+        return result
