@@ -64,18 +64,37 @@ class Zoo:
 
     def animals_status(self):
         result = f"You have {len(self.animals)} animals"
+        animal_types = {"Lion": [],
+                        "Tiger": [],
+                        "Cheetah": [],
+                        }
 
         for animal in self.animals:
-            result += "\n"
-            result += animal.__repr__()
+            animal_types[animal.__class__.__name__].append(animal)
+
+        for animal, animal_name in animal_types.items():
+            if animal:
+                result += "\n"
+                result += f"----- {len(animal_types[animal])} {animal}s:\n"
+                result += "\n".join([f"{x.__repr__()}" for x in animal_types[animal]])
 
         return result
 
     def workers_status(self):
-        result = f"You have {len(self.workers)} worker"
+        result = f"You have {len(self.workers)} workers"
 
-        for worker in self.animals:
-            result += "\n"
-            result += worker.__repr__()
+        worker_types = {"Keeper": [],
+                        "Caretaker": [],
+                        "Vet": [],
+                        }
+
+        for worker in self.workers:
+            worker_types[worker.__class__.__name__].append(worker)
+
+        for worker, worker_name in worker_types.items():
+            if worker:
+                result += "\n"
+                result += f"----- {len(worker_types[worker])} {worker}s:\n"
+                result += "\n".join([f"{x.__repr__()}" for x in worker_types[worker]])
 
         return result
