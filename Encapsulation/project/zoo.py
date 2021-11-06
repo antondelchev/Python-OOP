@@ -12,20 +12,18 @@ class Zoo:
         self.workers = []
 
     def add_animal(self, animal: Animal, price):
-        if price <= self.__budget and self.__animal_capacity - 1 >= 0:
+        if price <= self.__budget and len(self.animals) < self.__animal_capacity:
             self.__budget -= price
-            self.__animal_capacity -= 1
             self.animals.append(animal)
             return f"{animal.name} the {animal.__class__.__name__} added to the zoo"
 
-        if price > self.__budget and self.__animal_capacity - 1 >= 0:
+        if price > self.__budget:
             return "Not enough budget"
 
         return "Not enough space for animal"
 
     def hire_worker(self, worker: Worker):
-        if self.__workers_capacity - 1 >= 0:
-            self.__workers_capacity -= 1
+        if len(self.workers) < self.__workers_capacity:
             self.workers.append(worker)
             return f"{worker.name} the {worker.__class__.__name__} hired successfully"
 
