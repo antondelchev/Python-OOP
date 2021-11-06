@@ -37,20 +37,18 @@ class Pizza:
 
     @toppings_capacity.setter
     def toppings_capacity(self, value):
-        if value < 0:
+        if value <= 0:
             raise ValueError("The topping's capacity cannot be less or equal to zero")
         else:
             self.__toppings_capacity = value
 
     def add_topping(self, topping: Topping):
-        if self.toppings_capacity > 0:
+        if self.toppings_capacity > len(self.toppings):
             for type_name, weight in self.toppings.items():
-                if topping.topping_type == type_name and topping.weight and self.toppings_capacity - 1 > 0:
+                if topping.topping_type == type_name and topping.weight:
                     self.toppings[type_name] += weight
-                    self.toppings_capacity -= 1
                     return
             self.toppings[topping.topping_type] = topping.weight
-            self.toppings_capacity -= 1
         else:
             raise ValueError("Not enough space for another topping")
 
