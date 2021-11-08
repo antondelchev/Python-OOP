@@ -38,7 +38,10 @@ class PhotoAlbum:
             result += "\n"
             for photo in range(len(self.photos[page])):
                 if not self.photos[page][photo] == []:
-                    result += "[] "
+                    if photo == len(self.photos[page]) - 1:
+                        result += "[]"
+                    else:
+                        result += "[] "
             result += "\n"
             result += "-" * 11
 
