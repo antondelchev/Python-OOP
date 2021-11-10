@@ -1,4 +1,4 @@
-from project.customer import Customer
+from project.customer_first import CustomerFirst
 from project.dvd import DVD
 
 
@@ -16,7 +16,7 @@ class MovieWorld:
     def customer_capacity():
         return 10
 
-    def add_customer(self, customer: Customer):
+    def add_customer(self, customer: CustomerFirst):
         if len(self.customers) < self.customer_capacity():
             self.customers.append(customer)
 
