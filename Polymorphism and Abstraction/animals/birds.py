@@ -1,36 +1,23 @@
-from abc import ABC, abstractmethod
-
-from project.animals.animal import Animal
-from project.food import Food
-
-
-class Bird(Animal, ABC):
-    @abstractmethod
-    def __init__(self, name, weight, wing_size):
-        super().__init__(name, weight)
-        self.wing_size = wing_size
+from project.animals.animal import Bird
 
 
 class Owl(Bird):
+    ALLOWED_FOOD = ['Meat']
+    WEIGHT_GAIN = 0.25
+
     def __init__(self, name, weight, wing_size):
         super().__init__(name, weight, wing_size)
 
-    @staticmethod
-    def make_sound():
-        return "Hoot Hoot"
-
-    @staticmethod
-    def feed(food: Food):
-        pass
-
-    def __repr__(self):
-        return "{AnimalType} [{AnimalName}, {WingSize}, {AnimalWeight}, {FoodEaten}]"
+    def make_sound(self):
+        return 'Hoot Hoot'
 
 
 class Hen(Bird):
+    ALLOWED_FOOD = ['Vegetable', 'Seed', 'Fruit', 'Meat']
+    WEIGHT_GAIN = 0.35
+
     def __init__(self, name, weight, wing_size):
         super().__init__(name, weight, wing_size)
 
-    @staticmethod
-    def make_sound():
-        return "Cluck"
+    def make_sound(self):
+        return 'Cluck'
