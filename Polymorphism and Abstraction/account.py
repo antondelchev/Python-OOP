@@ -11,50 +11,47 @@ class Account:
 
     @property
     def balance(self):
-        result = self.amount + sum(self._transactions)
-        return result
+        return self.amount + sum(self._transactions)
 
-    def validate_transaction(self, account, amount_to_add):
-        if self.balance() < 0:
+    @staticmethod
+    def validate_transaction(account, amount_to_add):
+        expected_balance = account.balance + amount_to_add
+        if expected_balance < 0:
             raise ValueError("sorry cannot go in debt!")
         account.add_transaction(amount_to_add)
-        return f"New balance: {account.balance()}"
+        return f"New balance: {expected_balance}"
 
     def __gt__(self, other):
-        return sum(self._transactions) > sum(other._transactions)
+        return self.balance > other.balance
 
     def __ge__(self, other):
-        return sum(self._transactions) >= sum(other._transactions)
+        return self.balance >= other.balance
 
     def __lt__(self, other):
-        return sum(self._transactions) < sum(other._transactions)
+        return self.balance < other.balance
 
     def __le__(self, other):
-        return sum(self._transactions) <= sum(other._transactions)
+        return self.balance <= other.balance
 
     def __eq__(self, other):
-        return sum(self._transactions) == sum(other._transactions)
+        return self.balance == other.balance
 
     def __ne__(self, other):
-        return not sum(self._transactions) == sum(other._transactions)
+        return not self.balance == other.balance
 
     def __add__(self, other):
-        new_name = f"{self.owner}&{other.owner}"
-        new_amount = self.amount + other.amount
-        all_transactions = self._transactions + other._transactions
-        new_acc = Account(new_name, new_amount)
-        new_acc._transactions = all_transactions
+        new_acc = Account("{self.owner}&{other.owner}", self.amount + other.amount)
+        new_acc._transactions = self._transactions + other._transactions
         return new_acc
 
     def __len__(self):
         return len(self._transactions)
 
-    def __getitem__(self, item):
-        return self._transactions[item]
+    def __getitem__(self, index):
+        return self._transactions[index]
 
     def __reversed__(self):
-        reversed_list = self._transactions[::-1]
-        return reversed_list
+        return self._transactions[::-1]
 
     def __str__(self):
         return f"Account of {self.owner} with starting amount: {self.amount}"
