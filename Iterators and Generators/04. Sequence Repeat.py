@@ -2,20 +2,19 @@ class sequence_repeat:
     def __init__(self, sequence, number):
         self.sequence = sequence
         self.number = number
-        self.extended_sq = self.sequence + self.sequence * (self.number - len(self.sequence))
-        self.start = 0
+        self.idx = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.start > self.number - 1:
+        if self.number <= 0:
             raise StopIteration
-        if len(self.sequence) >= self.number:
-            current_char = self.sequence[self.start]
-        else:
-            current_char = self.extended_sq[self.start]
-        self.start += 1
+        current_char = self.sequence[self.idx]
+        self.idx += 1
+        self.number -= 1
+        if self.idx >= len(self.sequence):
+            self.idx = 0
         return current_char
 
 
