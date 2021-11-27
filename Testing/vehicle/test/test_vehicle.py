@@ -11,7 +11,7 @@ class TestVehicle(TestCase):
         self.assertEqual(self.vehicle.fuel, 50.8)
         self.assertEqual(self.vehicle.horse_power, 150)
         self.assertEqual(self.vehicle.capacity, 50.8)
-        self.assertEqual(self.vehicle.DEFAULT_FUEL_CONSUMPTION, 1.25)
+        self.assertEqual(self.vehicle.fuel_consumption, Vehicle.DEFAULT_FUEL_CONSUMPTION)
 
     def test_drive_with_enough_fuel(self):
         self.assertEqual(self.vehicle.fuel, 50.8)
@@ -21,7 +21,9 @@ class TestVehicle(TestCase):
     def test_drive_with_insufficient_fuel(self):
         self.assertEqual(self.vehicle.fuel, 50.8)
         with self.assertRaises(Exception) as ex:
-            self.assertEqual("Not enough fuel", ex.exception)
+            self.vehicle.drive(1000)
+
+        self.assertEqual("Not enough fuel", str(ex.exception))
 
     def test_refuel_with_valid_amount(self):
         self.assertEqual(self.vehicle.fuel, 50.8)
@@ -35,7 +37,9 @@ class TestVehicle(TestCase):
         self.vehicle.drive(10)
         self.assertEqual(self.vehicle.fuel, 38.3)
         with self.assertRaises(Exception) as ex:
-            self.assertEqual("Too much fuel", ex.exception)
+            self.vehicle.refuel(10000)
+
+        self.assertEqual("Too much fuel", str(ex.exception))
 
     def test_str_representation(self):
         self.assertEqual(str(self.vehicle), "The vehicle has 150 horse power with "
