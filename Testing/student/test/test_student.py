@@ -30,11 +30,12 @@ class TestStudent(TestCase):
             self.assertEqual(expected_result, result)
             self.student.courses.pop("c2")
 
-    def test_with_new_course_and_nonspecific_arguments_as_course_notes(self):
+    def test_with_new_course_and_no_notes_associated_with_it(self):
         result = self.student.enroll("c2", ["r"], "different notes")
         self.assertEqual("Course has been added.", result)
         expected_values_for_notes = list(self.student.courses.values())
         self.assertEqual(["notes"], *expected_values_for_notes)
+        self.assertEqual(self.student.courses["c2"], [])
 
     def test_add_notes_to_existing_course(self):
         result = self.student.add_notes("c1", "extra notes")
@@ -44,7 +45,7 @@ class TestStudent(TestCase):
 
     def test_add_notes_raises_exception(self):
         with self.assertRaises(Exception) as msg:
-            self.student.add_notes("c3", "rrr")
+            self.student.add_notes("c3", ["rrr"])
         self.assertEqual("Cannot add notes. Course not found.", str(msg.exception))
 
     def test_leave_existing_course(self):
