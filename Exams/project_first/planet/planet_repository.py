@@ -6,10 +6,13 @@ class PlanetRepository:
         self.planets = []  # list of objects
 
     def add(self, planet: Planet):
-        pass
+        self.planets.append(planet)
 
     def remove(self, planet: Planet):
-        pass
+        self.planets.remove(planet)
 
-    def find_by_name(self, name: str):  # find if exists
-        pass
+    def find_by_name(self, name: str):
+        for planet in self.planets:
+            if planet.name == name:
+                return planet
+        return None
