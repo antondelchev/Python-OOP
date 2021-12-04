@@ -10,6 +10,8 @@ class SpaceStation:
     def __init__(self):
         self.planet_repository = PlanetRepository()
         self.astronaut_repository = AstronautRepository()
+        self.completed_missions = 0
+        self.not_completed_missions = 0
 
     def add_astronaut(self, astronaut_type: str, name: str):
         if self.astronaut_repository.find_by_name(name):
@@ -70,13 +72,19 @@ class SpaceStation:
                 astronaut.breathe()
 
         if len(planet.items) == 0:
+            self.completed_missions += 1
             return f"Planet: {planet_name} was explored. {len(participated_astronauts)} " \
                    f"astronauts participated in collecting items."
         else:
+            self.not_completed_missions += 1
             return "Mission is not completed."
 
     def report(self):
-        pass
+        result = f"{self.completed_missions} successful missions!\n" \
+                 f"{self.not_completed_missions} missions were not completed!\n" \
+                 f"Astronauts' info:\n"
+        result += '\n'.join([str(astronaut) for astronaut in self.astronaut_repository.astronauts])
+        return result.strip()
 
     @staticmethod
     def create_astronaut(astronaut_type, name):
