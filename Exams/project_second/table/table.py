@@ -43,9 +43,11 @@ class Table(ABC):
         for drink in self.drink_orders:
             bill += drink.price
 
+        return bill
+
     def clear(self):
-        self.food_orders = []
-        self.drink_orders = []
+        self.food_orders.clear()
+        self.drink_orders.clear()
         self.number_of_people = 0
         self.is_reserved = False
 
