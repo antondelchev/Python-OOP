@@ -16,7 +16,7 @@ class DecorationRepository:
 
         return False
 
-    def find_by_name(self, decoration_type: str):
+    def find_by_type(self, decoration_type: str):
         for el in self.decorations:
             if el.__class__.__name__ == decoration_type:
                 return el

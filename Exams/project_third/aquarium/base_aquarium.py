@@ -54,3 +54,4 @@ class BaseAquarium(ABC):
         result += f"Fish: {' '.join(fish_info)}\n" if fish_info else "Fish: none\n"
         result += f"Decorations: {len(self.decorations)}\n"
         result += f"Comfort: {self.calculate_comfort()}"
+        return result
