@@ -11,6 +11,12 @@ class TestStudentReportCard(TestCase):
         self.assertEqual(8, self.report_card.school_year)
         self.assertEqual({}, self.report_card.grades_by_subject)
 
+    def test_empty_string_for_name_raises(self):
+        with self.assertRaises(ValueError) as msg:
+            new_card = StudentReportCard("", 3)
+        expected = "Student Name cannot be an empty string!"
+        self.assertEqual(expected, str(msg.exception))
+
 
 if __name__ == "__main__":
     main()
